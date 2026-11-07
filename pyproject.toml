@@ -1,0 +1,24 @@
+[tool.pyright]
+pythonVersion = "3.14"
+typeCheckingMode = "standard"
+useLibraryCodeForTypes = true
+exclude = [
+    "**/__pycache__",
+    "**/migrations",
+    ".venv",
+]
+reportMissingTypeStubs = "none"
+reportUnknownParameterType = "none"
+reportUnknownArgumentType = "none"
+reportUnknownVariableType = "none"
+reportUnknownMemberType = "none"
+reportUnknownLambdaType = "none"
+reportMissingParameterType = "none"
+reportUnannotatedClassAttribute = "none"
+reportImplicitOverride = "none"
+reportMissingTypeArgument = "none"
+reportAny = "none"
+reportExplicitAny = "none"
+reportUnusedParameter = "none"
+reportUnusedCallResult = "none"
+reportDeprecated = "none"
