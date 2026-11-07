@@ -7,16 +7,23 @@ def validate_input(a, b, f):
     if (f(a) * f(b)) > 0:
         raise ValueError("El rango es incorrecto")
 
+def condicion_bolzano(a,b,f):
+    return f(a) * f(b) < 0
+
 
 def bisectriz_op(a, b, f, n):
-    validate_input(a, b, f)
+    if not condicion_bolzano(a,b,f):
+        print("El intervalo inicial no cumple con las condiciones del T. Bolzano")
+        return None
 
-    for i in np.arange(n):
+    for _ in range(n):
         c = (a + b) / 2
-        if not (f(a) * f(c) < 0):
-            a = c
-        elif f(b) * f(c) > 0:
-            b = c
+
+        if condicion_bolzano(a, c,f): b = c
+        elif condicion_bolzano(c, b, f): a=c
+        else:
+            if f(a) == 0: return a 
+            else: return b
     return c
 
 
