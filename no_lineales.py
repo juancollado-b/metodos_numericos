@@ -1,40 +1,49 @@
 import numpy as np
 
-NEWTON_ERROR = 0.001
-
-
-def validate_input(a, b, f):
-    if (f(a) * f(b)) > 0:
-        raise ValueError("El rango es incorrecto")
-
-def condicion_bolzano(a,b,f):
-    return f(a) * f(b) < 0
+NEWTON_MAX_ITER = 200
 
 
 def bisectriz_op(a, b, f, n):
-    if not condicion_bolzano(a,b,f):
+    if n <= 0:
+        print("El numero de iteraciones debe ser mayor a 0")
+        return None
+
+    f_a = f(a)
+    f_b = f(b)
+    if f_a * f_b > 0:
         print("El intervalo inicial no cumple con las condiciones del T. Bolzano")
         return None
 
     for _ in range(n):
         c = (a + b) / 2
+        f_c = f(c)
 
-        if condicion_bolzano(a, c,f): b = c
-        elif condicion_bolzano(c, b, f): a=c
+        if f_c == 0:
+            return c
+
+        if f_a * f_c < 0:
+            b = c
+            f_b = f_c
         else:
-            if f(a) == 0: return a 
-            else: return b
-    return c
+            a = c
+            f_a = f_c
+
+    return (a + b) / 2
 
 
-def newton_raphson(x, f, df):
+def newton_raphson(x, f, df, err_newton):
     x_a = x
-    while True:
-        derivate_value = df(x_a)
-        if derivate_value == 0: break
-        x_b = x_a - (f(x_a) / derivate_value)
-        if abs(x_b - x_a) <= NEWTON_ERROR: break
+    # Propongo un numero maximo de iteraciones, que de no cumplir determino no-convergenica
+    for i in range(NEWTON_MAX_ITER):
+        d_value = df(x_a)
+        if d_value == 0:
+            print(f"Derivada cero en iteracion {i + 1}. No aplica el metodo.")
+            return None
+
+        x_b = x_a - f(x_a) / d_value
+        if abs(x_b - x_a) <= err_newton:
+            return {"raiz": x_b, "iter": i + 1}
         x_a = x_b
 
-    return x_a
-
+    print(f"No converge para la cantidad de iteraciones definida ({NEWTON_MAX_ITER})")
+    return None

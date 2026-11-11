@@ -30,8 +30,8 @@ def simpson_c(a,b,n, f):
 
 
 result_r = riemman(0,1,34, expon)
-result_t = trapecios_c(0,2, 10000, cuadr)
-result_s = simpson_c(0, 2, 10000, cuadr)
+result_t = trapecios_c(0,2, 34, cuadr)
+result_s = simpson_c(0, 2, 34, cuadr)
 print("RESULT", result_r)
 print("RESULT TRAPECIO", result_t)
 print("RESULT SIMPSON", result_s)

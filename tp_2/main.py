@@ -20,6 +20,7 @@ functions.analisis_ciclo(ciclos_cardiacos[0])
 """
 La interpolación polinómica no es muy precisa para estos datos porque cada ciclo tiene muchos puntos,
 lo que genera un polinomio de grado muy alto.
-Estos polinomios suelen ser inestables y producen oscilaciones artificiales, especialmente en los extremos.
-Como se puede observar en el extremo derecho del grafico, las integrales sobre este polinomio por lo tanto tambien son imprecisas
+Estos polinomios suelen ser inestables y producen oscilaciones artificiales, especialmente en los extremos,
+como se puede observar en el extremo derecho del grafico.
+Las integrales sobre este polinomio interpolador por lo tanto tambien seran imprecisas
 """
