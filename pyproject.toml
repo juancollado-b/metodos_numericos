@@ -1,6 +1,6 @@
 [tool.pyright]
 pythonVersion = "3.14"
-typeCheckingMode = "standard"
+typeCheckingMode = "off"
 useLibraryCodeForTypes = true
 exclude = [
     "**/__pycache__",

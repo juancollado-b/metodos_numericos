@@ -3,6 +3,12 @@ import numpy as np
 NEWTON_MAX_ITER = 200
 
 
+def iteraciones_por_error(a, b, error_decimal):
+    ineq = (np.log((b - a) * np.pow(10, error_decimal)) / np.log(2)) - 1
+    return int(np.ceil(ineq))
+
+
+
 def bisectriz_op(a, b, f, n):
     if n <= 0:
         print("El numero de iteraciones debe ser mayor a 0")
@@ -30,7 +36,7 @@ def bisectriz_op(a, b, f, n):
 
     return (a + b) / 2
 
-
+# Dado f dos veces derivable y al menos una raiz simple en [a,b]
 def newton_raphson(x, f, df, err_newton):
     x_a = x
     # Propongo un numero maximo de iteraciones, que de no cumplir determino no-convergenica
