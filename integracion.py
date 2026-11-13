@@ -58,6 +58,35 @@ def cota_simpson(a, b, n, f4):
     return (np.pow(b - a, 5) / np.pow(180 * n, 4)) * M4
 
 
+def n_trapecios(a, b, error_deseado, f2, puntos=10000):
+    if error_deseado <= 0 or b <= a:
+        raise ValueError("Intervalo o error deseado inválido")
+
+    x = np.linspace(a, b, puntos)
+    M2 = np.max(np.abs(f2(x)))
+
+    n = np.ceil(np.sqrt(((b - a) ** 3 * M2) / (12 * error_deseado)))
+
+    return max(1, int(n))
+
+
+def n_simpson(a, b, error_deseado, f4, puntos=10000):
+    if error_deseado <= 0 or b <= a:
+        raise ValueError("Intervalo o error deseado inválido")
+
+    x = np.linspace(a, b, puntos)
+    M4 = np.max(np.abs(f4(x)))
+
+    n = np.ceil(((b - a) ** 5 * M4 / (180 * error_deseado)) ** (1 / 4))
+
+    # Simpson 1/3 necesita un número par de subintervalos
+    n = max(2, int(n))
+
+    if n % 2 != 0:
+        n += 1
+    return n
+
+
 result_r = riemman(0, 1, 34, expon)
 result_t = trapecios_c(0, 2, 34, cuadr)
 result_s = simpson_c(0, 2, 34, cuadr)
