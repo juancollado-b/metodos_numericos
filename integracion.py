@@ -5,16 +5,23 @@ cuadr = lambda x: np.pow(x, 2)
 print("cuad", cuadr(2))
 
 
-def riemman(a, b, N, f):
-    h = (b - a) / N
+def riemman(a, b, n, f):
+    h = (b - a) / (n - 1)
     puntos_medios = np.arange(a + h / 2, b, h)
     y = f(puntos_medios)
     integ = sum(y) * h
     return integ
 
 
+def cota_rimman(a, b, n, f2):
+    x = np.linspace(a, b, 10000)
+    h = (b - a) / (n - 1)
+    M2 = np.max(np.abs(f2(x)))
+    return M2 * (b - a) * (h**2) / 24
+
+
 def trapecios_c(a, b, n, f):
-    h = (b - a) / n
+    h = (b - a) / (n - 1)
     ptos = np.arange(a + h, b, h)
     y = f(ptos)
     sum_ev = np.sum(y)
@@ -23,16 +30,18 @@ def trapecios_c(a, b, n, f):
 
 def cota_trapecios(a, b, n, f2):
     x = np.linspace(a, b, 10000)
+    h = (b - a) / (n - 1)
     M2 = np.max(np.abs(f2(x)))
 
-    return (np.pow(b - a, 3) / np.pow(12 * n, 2)) * M2
+    print("M2 rimman", M2)
+    return (b - a) * (h**2) * M2 / 12
 
 
 def simpson_c(a, b, n, f):
-    if n % 2 != 0:
+    if n % 2 != 0:  # Cantidad de nodos par, cantidad de intervalos (n-1) impar
         return False
 
-    h = (b - a) / n
+    h = (b - a) / (n - 1)
     pares = f(np.arange(a + 2 * h, b, 2 * h))
     impares = f(np.arange(a + h, b, 2 * h))
 
