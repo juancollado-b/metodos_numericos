@@ -1,0 +1,6 @@
+{
+    "mypy-type-checker.ignorePatterns": [
+        "*.py",
+        "**/*.py"
+    ]
+}
